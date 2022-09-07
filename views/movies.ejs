@@ -37,12 +37,6 @@
             <% }) %>
      </ul>
 
-     
-
-      
-  
-    
-
     <a href="/logout">Logout</a>
 
 
@@ -58,7 +52,7 @@
             <% for ( let i = 0; i<addMovies.length;i++ ) { %>
               <div class="col-md-6 col-lg-3">
                 <div class="card bg-light">
-                  <div class="card-body text-center movieItem" data-id='<%=addMovies[i].id%>' data-title='<%=addMovies[i].title%>' data-poster='<%addMovies[i].poster_path%>'>
+                  <div class="card-body text-center movieItem" data-id='<%=addMovies[i].id%>' data-title='<%=addMovies[i].title%>' data-poster='<%addMovies[i].poster_path%>' data-page='home'>
 
                     <img
                       src="https://image.tmdb.org/t/p/w200<%= addMovies[i].poster_path %> "

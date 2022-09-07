@@ -23,8 +23,14 @@ async function addMovie() {
     const movieId = this.parentNode.dataset.id
     const movieTitle = this.parentNode.dataset.title
     const moviePoster = this.parentNode.dataset.poster_path
+    const page = this.parentNode.dataset.page
+    let urlKey;
+    if (page)
+        urlKey = "/movies/"
+    else
+        urlKey = '';
     try {
-        const response = await fetch('./findMovie/addMovie', {
+        const response = await fetch(urlKey + 'findMovie/addMovie', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
