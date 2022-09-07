@@ -10,7 +10,7 @@ module.exports = {
             // console.log(data); 
             const movieItems = await Movie.find({ userId: req.user.id })
             const itemsLeft = await Movie.countDocuments({ userId: req.user.id, completed: false })
-            res.render('movies.ejs', { movies: movieItems, left: itemsLeft, user: req.user, data:data})
+            res.render('movies.ejs', { movies: movieItems, left: itemsLeft, user: req.user, addMovies:data.results})
         } catch (err) {
             console.log(err)
         }
@@ -20,8 +20,8 @@ module.exports = {
         try {
             const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_KEY}&language=en-US&page=1&include_adult=false&query=${req.body.movieItem}`)
             const data = await response.json()
-            console.log(data)
-            res.render('find-movie.ejs', {movies: data.results})
+            // console.log(data)
+            res.render('find-movie.ejs', {addMovies: data.results})
         }catch(err){ 
             console.log(err)
         }

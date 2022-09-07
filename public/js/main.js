@@ -24,7 +24,7 @@ async function addMovie() {
     const movieTitle = this.parentNode.dataset.title
     const moviePoster = this.parentNode.dataset.poster_path
     try {
-        const response = await fetch('findMovie/addMovie', {
+        const response = await fetch('./findMovie/addMovie', {
             method: 'post',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
@@ -34,7 +34,7 @@ async function addMovie() {
             })
         })
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         window.location = '/movies'
     } catch (err) {
         console.log(err)

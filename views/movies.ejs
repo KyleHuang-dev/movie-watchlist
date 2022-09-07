@@ -15,16 +15,18 @@
 
 <body>
     <%- include('nav'); -%>
-    <h1>Movies</h1>
+    <h1>Your Watch List:</h1>
 
-    <form action="/movies/findMovie" method='POST'>
-        <input type="text" id="search" class="search" placeholder="Enter a movie" name='movieItem'>
-        <input type="submit">
+    <form class="row g-3" action="/movies/findMovie" method='POST'>
+      <div class="col-3">
+        <input type="text" id="search" class="search form-control " placeholder="Enter a movie" name='movieItem' >
+      </div>
+      <div class="col-auto">
+        <input type="submit" value="Search" class="btn mb-3 btn-primary">
+      </div>
     </form>
 
-    <!-- <h2>
-        <%= user.userName %> has <%= left %> things left to do.
-    </h2> -->
+   
     
     <ul>
         <% movies.forEach( el=> { %>
@@ -33,7 +35,12 @@
                 <span class='del'> Delete </span>
             </li>
             <% }) %>
-    </ul>
+     </ul>
+
+     
+
+      
+  
     
 
     <a href="/logout">Logout</a>
@@ -48,20 +55,22 @@
           </p>
           <div class="row g-4">
 
-            <% for ( let i = 0; i<data.results.length;i++ ) { %>
+            <% for ( let i = 0; i<addMovies.length;i++ ) { %>
               <div class="col-md-6 col-lg-3">
                 <div class="card bg-light">
-                  <div class="card-body text-center">
+                  <div class="card-body text-center movieItem" data-id='<%=addMovies[i].id%>' data-title='<%=addMovies[i].title%>' data-poster='<%addMovies[i].poster_path%>'>
+
                     <img
-                      src="https://image.tmdb.org/t/p/w200<%= data.results[i].poster_path %> "
+                      src="https://image.tmdb.org/t/p/w200<%= addMovies[i].poster_path %> "
                       class="mb-3"
                       alt=""
                     />
-                    <h3 class="card-title mb-3"> <%= data.results[i].title %> </h3>
+                    <h3 class="card-title mb-3"> <%= addMovies[i].title %> </h3>
                     <p class="card-text">
-                     Vote: <%= data.results[i].vote_average %> 
+                     Vote: <%= addMovies[i].vote_average %> 
                     </p>
-                    <p>Release date: <%= data.results[i].release_date %> </p>
+                    <p>Release date: <%= addMovies[i].release_date %> </p>
+                    <button class='add btn btn-primary'>Add to watch list</button>
                   </div>
                 </div>
               </div>
