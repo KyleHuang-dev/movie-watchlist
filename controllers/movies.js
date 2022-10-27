@@ -62,11 +62,11 @@ module.exports = {
     },
     // delete a movie on the list
     deleteMovie: async (req, res) => {
-        console.log(req.body.movieIdFromJSFile)
         try {
-            await Movie.findOneAndDelete({ _id: req.body.movieIdFromJSFile })
+            let movie = await Movie.findById({ _id: req.params.id });
+            await Movie.remove(movie);
             console.log('Deleted Movie')
-            res.json('Deleted It')
+            res.redirect('/movies')
         } catch (err) {
             console.log(err)
         }

@@ -13,7 +13,7 @@ router.put('/watched', moviesController.watched)
 
 router.put('/unwatched', moviesController.unwatched)
 
-router.delete('/deleteMovie', moviesController.deleteMovie)
+router.delete('/deleteMovie/:id', moviesController.deleteMovie)
 
 module.exports = router
  

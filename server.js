@@ -6,6 +6,7 @@ const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const flash = require('express-flash')
 const logger = require('morgan')
+const methodOverride = require("method-override");
 const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const moviesRoutes = require('./routes/movies')
@@ -17,6 +18,7 @@ require('dotenv').config({ path: './config/.env' })
 require('./config/passport')(passport)
 
 connectDB()
+
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -32,6 +34,8 @@ app.use(
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })
 )
+
+app.use(methodOverride("_method"));
 
 // Passport middleware
 app.use(passport.initialize())

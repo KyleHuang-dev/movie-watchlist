@@ -15,29 +15,55 @@
 
 <body>
     <%- include('nav'); -%>
-    <h1>Your Watch List:</h1>
-
-    <form class="row g-3" action="/movies/findMovie" method='POST'>
-      <div class="col-3">
-        <input type="text" id="search" class="search form-control " placeholder="Enter a movie" name='movieItem' >
-      </div>
-      <div class="col-auto">
-        <input type="submit" value="Search" class="btn mb-3 btn-primary">
-      </div>
-    </form>
-
-   
     
-    <ul>
-        <% movies.forEach( el=> { %>
-            <li class='movieItem' data-id='<%=el._id%>'>
-                <span class='<%= el.completed === true ? ' completed' : 'not' %>'><%= el.movie %></span>
-                <span class='del'> Delete </span>
-            </li>
-            <% }) %>
-     </ul>
+    <div class="container">
+      <h1>Your Watch List:</h1>
+      <form class="row g-3" action="/movies/findMovie" method='POST'>
+        <div class="col-3">
+          <input type="text" id="search" class="search form-control " placeholder="Enter a movie" name='movieItem' >
+        </div>
+        <div class="col-auto">
+          <input type="submit" value="Search" class="btn mb-3 btn-primary">
+        </div>
+    </form>
+  </div>
+    <% if(movies.length !== 0) {%>
+    <div class="container">
+    <table class="table table-light">
+      <thead>
+       
+        <tr>
+          <th scope="col">Movie ID</th>
+          <th scope="col">Movie Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% movies.forEach( movie=> { %>
+        <tr>
+          <th scope="row"><%= movie.movieId%></th>
+          <td><%= movie.movie %></td>
+          <td>
+            <form
+                action="/movies/deleteMovie/<%=movie._id%>?_method=DELETE"
+                method="POST"
+                class=""
+              >
+                <button class=" btn btn-danger" type="submit">Delete</button>
+            </form>
+          </td>
+            
+           </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <% } %>
 
-    <a href="/logout">Logout</a>
+
+
+    
+  
 
 
     <!-- Movie Section -->
